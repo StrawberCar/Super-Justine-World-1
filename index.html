@@ -19,14 +19,35 @@
       --accent:#e7c76f;       /* ticket edge */
     }
 
-    /* Reset-ish */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; background: radial-gradient(1200px 600px at 50% -200px, #1b1730 0%, var(--bg) 60%);
-      color:var(--ink); font: 16px/1.4 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      margin:0;
+      background: radial-gradient(1200px 600px at 50% -200px, #1b1730 0%, var(--bg) 60%);
+      color:var(--ink);
+      font: 16px/1.4 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
       display:flex; flex-direction:column; align-items:center; gap:24px; padding:24px;
     }
+
+    /* Top button bar */
+    .top-bar{
+      width:min(1100px, 96vw);
+      display:flex; justify-content:flex-end;
+      margin-bottom:6px;
+    }
+    .top-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 18px;
+      font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+      border-radius:999px;
+      background: radial-gradient(circle at 50% 0%, var(--gold-hi), var(--gold) 65%);
+      color:#230e00; text-decoration:none; cursor:pointer;
+      border:0;
+      box-shadow: 0 4px 0 #8a6b17, 0 10px 18px rgba(0,0,0,.35);
+      transition: transform .08s ease, filter .18s ease;
+    }
+    .top-btn:hover{ filter:brightness(1.05) contrast(1.05) saturate(1.07); }
+    .top-btn:active{ transform: translateY(2px); box-shadow: 0 3px 0 #8a6b17, 0 6px 12px rgba(0,0,0,.3); }
 
     /* Marquee Header */
     .marquee{
@@ -45,9 +66,8 @@
       margin:0; font-weight:900; font-size: clamp(22px, 4vw, 42px);
       text-shadow: 0 2px 0 #6c0712, 0 0 18px rgba(231,199,111,.45);
     }
-    /* Animated bulb border */
     .bulbs{
-      --n:24; /* bulbs per row */
+      --n:24;
       position:absolute; inset:-20px -20px auto -20px; height:18px;
       background: repeating-conic-gradient(from 0deg,
         var(--bulb-on) 0 5deg,
@@ -71,10 +91,8 @@
       border-radius:20px; padding:26px; box-shadow: 0 14px 34px rgba(0,0,0,.7), inset 0 0 0 4px var(--gold-hi);
     }
 
-    /* Gold poster frame */
     .frame{
-      position:relative; aspect-ratio: 27/40; /* classic poster ratio */
-      border-radius:14px; overflow:hidden;
+      position:relative; aspect-ratio: 27/40; border-radius:14px; overflow:hidden;
       background: linear-gradient(145deg, var(--gold) 0%, #8a6b17 30%, var(--gold) 60%, var(--gold-hi) 100%);
       padding:12px; box-shadow: 0 10px 20px rgba(0,0,0,.5), inset 0 0 20px rgba(0,0,0,.25);
     }
@@ -82,23 +100,18 @@
       width:100%; height:100%; object-fit:cover; display:block;
       border-radius:8px; box-shadow: inset 0 0 40px rgba(0,0,0,.35);
     }
-    .frame::after{ /* subtle glass sheen */
+    .frame::after{
       content:""; position:absolute; inset:0; border-radius:8px;
       background: linear-gradient(60deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,.1) 55%, rgba(0,0,0,.15) 100%);
       pointer-events:none; mix-blend-mode: screen;
     }
 
-    /* Ticket-styled play panel */
-    .panel{
-      align-self:stretch; display:flex; flex-direction:column; justify-content:center; gap:18px;
-      padding:18px; position:relative;
-    }
+    .panel{ align-self:stretch; display:flex; flex-direction:column; justify-content:center; gap:18px; padding:18px; position:relative; }
 
     .ticket{
       background: linear-gradient(#f8e4a6, #e7c76f);
       color:#3b2a04; border:2px dashed #8a6b17; border-radius:16px;
       padding:22px 20px; text-align:center; box-shadow: 0 10px 20px rgba(0,0,0,.45);
-      clip-path: path('M16,0 H calc(100% - 16) a16,16 0 0 1 16,16 V 56 a16,16 0 0 0 0,0 V calc(100% - 16) a16,16 0 0 1 -16,16 H 16 a16,16 0 0 1 -16,-16 V 56 a16,16 0 0 0 0,0 V 16 A16,16 0 0 1 16,0 Z');
     }
     .ticket h2{ margin:0 0 6px; font-size:clamp(18px, 2.6vw, 28px); letter-spacing:.08em; text-transform:uppercase; }
     .ticket p{ margin:0; opacity:.8 }
@@ -117,10 +130,8 @@
     .play:active{ transform: translateY(2px); box-shadow: 0 4px 0 #8a6b17, 0 10px 18px rgba(0,0,0,.35); }
     .play svg{ width:22px; height:22px; flex:0 0 auto; }
 
-    /* Footer trim */
     footer{ opacity:.7; font-size:14px }
 
-    /* Responsive */
     @media (max-width: 860px){
       .stage{ grid-template-columns: 1fr; }
       .panel{ padding-top:0 }
@@ -129,6 +140,11 @@
   </style>
 </head>
 <body>
+  <!-- New top bar button -->
+  <div class="top-bar">
+    <a href="https://example.com" class="top-btn">Back to Lobby</a>
+  </div>
+
   <header class="marquee" role="banner" aria-label="Theater marquee">
     <div class="bulbs" aria-hidden="true"></div>
     <h1>Grand Justine Theater</h1>
@@ -146,7 +162,6 @@
       <div class="ticket" role="group" aria-labelledby="now-showing">
         <h2 id="now-showing">Now Showing</h2>
         <p>Step right up to try the brand new Super Justine World 1!</p>
-        <!-- Replace the href value with your desired link -->
         <a class="play" href="#" data-play-url="Game1/Game.html" aria-label="Play Game">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           Play
